@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Advanced CSS: Flexbox Children, Hiding Elements, Pseudo-elements, Background, !important, CSS Keywords & Vendor Prefixes — Session 15 of 15 | Web Design Bootcamp by Yousef Eldbah">
+  <title>Session 15: Advanced CSS Techniques | Web Design Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Cairo:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="session15.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Toggle menu">&#9776;</button>
+    <div class="navbar-brand">
+      <div class="logo">W</div>
+      <span>Web Design Bootcamp</span>
+    </div>
+    <div class="navbar-center">
+      <input type="text" class="navbar-search" placeholder="Search topics..." id="searchInput" onkeyup="filterTopics()">
+    </div>
+    <div class="navbar-right">
+      <span class="nav-badge">Session 15 / 15</span>
+    </div>
+  </nav>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-progress">
+      <div style="font-size:.85rem;font-weight:600;color:#fff">Session Progress</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">0% Complete</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Getting Started</div>
+      <a class="sidebar-link" href="#hero"><span class="icon">&#127968;</span> Overview</a>
+      <a class="sidebar-link" href="#instructor"><span class="icon">&#128104;&#8205;&#127979;</span> Instructor</a>
+      <a class="sidebar-link" href="#objectives"><span class="icon">&#127919;</span> Objectives</a>
+      <a class="sidebar-link" href="#roadmap-section"><span class="icon">&#128506;</span> Roadmap</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Topics</div>
+      <a class="sidebar-link" href="#topic1"><span class="icon">&#128736;</span> Flexbox Children</a>
+      <a class="sidebar-link" href="#topic2"><span class="icon">&#128065;</span> Hiding Elements</a>
+      <a class="sidebar-link" href="#topic3"><span class="icon">&#10024;</span> Pseudo-elements</a>
+      <a class="sidebar-link" href="#topic4"><span class="icon">&#127912;</span> Background</a>
+      <a class="sidebar-link" href="#topic5"><span class="icon">&#9889;</span> !important</a>
+      <a class="sidebar-link" href="#topic6"><span class="icon">&#128260;</span> inherit / unset</a>
+      <a class="sidebar-link" href="#topic7"><span class="icon">&#128295;</span> Vendor Prefixes</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Practice</div>
+      <a class="sidebar-link" href="#project"><span class="icon">&#128187;</span> Mini Project</a>
+      <a class="sidebar-link" href="#cheatsheet"><span class="icon">&#128196;</span> Cheat Sheet</a>
+      <a class="sidebar-link" href="#summary"><span class="icon">&#128214;</span> Summary</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+    <div class="content-wrapper">
+
+      <!-- HERO -->
+      <section class="hero animate-in" id="hero">
+        <div class="hero-badge">&#128218; Module 2 &middot; Session 15 of 15 &middot; Final Session</div>
+        <h1>Advanced CSS Techniques</h1>
+        <p class="subtitle">Master Flexbox child properties, element visibility patterns, pseudo-elements decoration,
+          background systems, CSS priority rules, global keywords, and vendor prefixes — everything you need for
+          production-ready layouts.</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><span class="icon">&#9202;</span> 6 Hours</div>
+          <div class="hero-meta-item"><span class="icon">&#128218;</span> 7 Topics</div>
+          <div class="hero-meta-item"><span class="icon">&#128187;</span> Mini Project</div>
+          <div class="hero-meta-item"><span class="icon">&#127942;</span> Intermediate</div>
+        </div>
+      </section>
+
+      <!-- INSTRUCTOR -->
+      <section class="instructor-card animate-in delay-1" id="instructor">
+        <div class="instructor-avatar">YE</div>
+        <div class="instructor-info">
+          <h3>Yousef Eldbah</h3>
+          <div class="role">Full Stack Dev (React & .NET) @ Dimensions IT</div>
+          <div class="bio">MERN Freelancer &middot; Instructor @ NTI &middot; Co-Founder @ MindLoop Academy &middot; ITI
+            Graduate</div>
+          <div class="instructor-tags">
+            <span class="instructor-tag">CSS</span>
+            <span class="instructor-tag">Flexbox</span>
+            <span class="instructor-tag">Layout</span>
+            <span class="instructor-tag">UI Design</span>
+          </div>
+          <a href="https://www.linkedin.com/in/yousef-eldbah/" target="_blank" class="instructor-link"
+            style="margin-top:8px">LinkedIn Profile &#8599;</a>
+        </div>
+      </section>
+
+      <!-- TOC -->
+      <div class="toc-box animate-in delay-2" id="toc">
+        <h3>&#128203; Table of Contents</h3>
+        <ol class="toc-list">
+          <li><a href="#topic1">1. Flexbox — Child Properties (order, flex-grow, flex-shrink, flex-basis, flex)</a></li>
+          <li><a href="#topic2">2. Hiding Elements (display, visibility, opacity, pointer-events)</a></li>
+          <li><a href="#topic3">3. Pseudo-elements (::before, ::after)</a></li>
+          <li><a href="#topic4">4. Background + Color Formats (RGBA, HEX, HSL)</a></li>
+          <li><a href="#topic5">5. !important &amp; CSS Specificity</a></li>
+          <li><a href="#topic6">6. Global Keywords (inherit, initial, unset, revert)</a></li>
+          <li><a href="#topic7">7. Vendor Prefixes &amp; Autoprefixer</a></li>
+          <li><a href="#project">Mini Project — Product Landing Page</a></li>
+          <li><a href="#cheatsheet">Cheat Sheet</a></li>
+          <li><a href="#summary">Summary</a></li>
+        </ol>
+      </div>
+
+      <!-- OBJECTIVES -->
+      <section class="section-block animate-in delay-3" id="objectives">
+        <h3><span class="emoji">&#127919;</span> Session Learning Objectives</h3>
+        <ul class="objectives">
+          <li>Control individual Flex items using order, flex-grow, flex-shrink, flex-basis, and the flex shorthand.
+          </li>
+          <li>Choose the correct hiding technique (display, visibility, opacity, pointer-events) for each real-world
+            scenario.</li>
+          <li>Build decorative UI patterns with ::before and ::after without modifying HTML structure.</li>
+          <li>Apply background properties and color formats (HEX, RGB, RGBA, HSL) to create Hero sections.</li>
+          <li>Understand CSS specificity and when !important is acceptable vs dangerous.</li>
+          <li>Use inherit, initial, unset, and revert to reset or cascade property values intentionally.</li>
+          <li>Explain vendor prefixes history and why Autoprefixer is the modern best practice.</li>
+        </ul>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="section-block" id="roadmap-section">
+        <h3><span class="emoji">&#128506;</span> Session Roadmap</h3>
+        <div class="roadmap">
+          <div class="roadmap-step">&#128736; Flex Children</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#128065; Hide Elements</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#10024; Pseudo-elements</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#127912; Background</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#9889; !important</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#128260; Keywords</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#128295; Prefixes</div>
+          <span class="roadmap-arrow">&#10132;</span>
+          <div class="roadmap-step">&#128187; Mini Project</div>
+        </div>
+      </section>
+
+      <!-- PLACEHOLDER: TOPICS WILL BE INSERTED HERE<!-- TOPIC 1: FLEXBOX CHILDREN PROPERTIES -->
+      <div class="topic-section" id="topic1">
+        <div class="topic-header">
+          <div class="topic-number">1</div>
+          <h2>Flexbox Child Properties / خصائص عناصر الـ Flexbox للأبناء</h2>
+          <p class="topic-subtitle">Control the alignment, sizing, and order of individual elements inside a Flex
+            Container.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#128736;</span> Concept & Why It Exists / الفكرة وسبب الوجود</h3>
+          <p>While parent Flexbox properties (like <code>justify-content</code> or <code>align-items</code>) manage the
+            layout globally, <strong>Child Properties</strong> allow developers to target individual flex items. This
+            solved the old CSS layout problem of having to write float hacks, absolute positioning, or table structures
+            just to make one block expand or shift position.</p>
+          <div class="arabic">
+            بينما خصائص الأب (Flex Container) بتتحكم في الشكل العام للتنسيق، خصائص الأبناء (Flex Items) بتخليك تتحكم في كل عنصر لوحده بدقة. وده حل مشكلة قديمة أوي في الـ CSS لما كنا بنحتاج نلجأ لحيل الطفو (floats) أو التموضع المطلق (absolute) عشان نكبر مربع واحد أو نغير مكانه.
+          </div>
+        </section>
+
+        <!-- Properties Details -->
+        <section class="section-block">
+          <h3>Properties Breakdown </h3>
+
+          <!-- order -->
+          <div class="card">
+            <h4 style="color:var(--accent-cyan)">1. order</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Rearranges elements visually on the screen without
+                changing the HTML source code.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To dynamically adjust visual flow across different
+                responsive layouts (e.g. mobile vs desktop).</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Eliminated the need to duplicate HTML elements or
+                write complex JavaScript to move nodes around the page on window resize.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> Responsive web layouts where an auxiliary column (like a
+                sidebar) must move beneath or above the main text column on small mobile screens.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> Do not use it for keyboard tab focus navigation
+                layouts, as the user will hit the tab key and jump in a chaotic visual sequence (breaks Web
+                Accessibility).</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Modifying the order of input form fields, causing
+                screen readers to read fields in a confusing sequence.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Keep the source HTML order logical for SEO and Screen
+                Readers, and use <code>order</code> only for decorative shifts.</li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike float and position, <code>order</code> keeps elements
+                relative inside the flex flow and automatically respects flex wrapping rules.</li>
+            </ul>
+            <div class="arabic">
+              <strong>order:</strong> بتغير الترتيب البصري للعناصر على الشاشة من غير ما نغير ترتيبهم في كود الـ HTML الأساسي. بتنفعك جداً مع الشاشات المتجاوبة عشان تنقل القائمة الجانبية تحت المحتوى الأساسي في الموبايل مثلاً. قيمتها الافتراضية 0 وتقدر تديها أرقام موجبة أو سالبة عادي.
+            </div>
+
+            <!-- Codes -->
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.card-highlight</span> {
+  <span class="prop">order</span>: <span class="num">-1</span>; <span class="cm">/* Makes this card appear before all other sibling items / يجعل هذا العنصر يظهر أولاً */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي من المشاريع:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Responsive Profile layout: Avatar appears first on mobile, details on desktop / ترتيب محتويات حساب العميل */</span>
+<span class="sel">.user-avatar</span> {
+  <span class="prop">order</span>: <span class="num">1</span>; <span class="cm">/* Shows first on mobile / يظهر أولاً على الموبايل */</span>
+}
+<span class="sel">.user-info</span> {
+  <span class="prop">order</span>: <span class="num">2</span>;
+}
+
+<span class="sel">@media</span> (<span class="prop">min-width</span>: <span class="num">768px</span>) {
+  <span class="sel">.user-avatar</span> {
+    <span class="prop">order</span>: <span class="num">2</span>; <span class="cm">/* Switches position on larger screens / ينتقل للموضع الثاني في الشاشات الكبيرة */</span>
+  }
+  <span class="sel">.user-info</span> {
+    <span class="prop">order</span>: <span class="num">1</span>;
+  }
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 1: Re-arrange Columns / تحدي إعادة الترتيب</div>
+                <div class="callout-body">
+                  You have three boxes: [1] [2] [3]. Write a rule using only <code>order</code> to make them appear on
+                  screen visually as [2] [3] [1].
+                  <br><strong>Solution Hint:</strong> Give Box 1 the highest positive value (e.g. <code>order: 1</code>)
+                  and let others remain default 0.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">عندك تلات صناديق [1] [2] [3]. اكتب كود باستخدام الـ <code>order</code> عشان يظهروا ع الشاشة بالترتيب ده: [2] [3] [1].</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- flex-grow -->
+          <div class="card">
+            <h4 style="color:var(--accent-cyan)">2. flex-grow</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Determines how much an element expands to fill empty
+                space relative to its siblings.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To allow developers to create dynamic expanding
+                layouts (like sidebar/content ratios) without hardcoding percentages.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Solved complex calculations to divide remaining
+                width when mixing static columns (e.g. 200px) with dynamic ones.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> Search bars in navigation menus, content body sections in
+                layouts, or dynamically sized grid cards.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> When you need strict, unbending column sizes (like
+                exact thumbnail grids) where sizing must remain constant.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Thinking <code>flex-grow: 2</code> makes an item
+                twice the size of <code>flex-grow: 1</code>. It makes the item grow twice as fast, but starting base
+                widths still affect total calculations.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Set <code>flex-basis</code> to <code>0</code> or
+                <code>0%</code> when using grow to guarantee absolute growth proportions.</li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike `width: 100%`, <code>flex-grow</code> expands only to
+                consume *available remaining space* without overflowing parent boundaries.</li>
+            </ul>
+            <div class="arabic">
+              <strong>flex-grow:</strong> بتحدد العنصر هيكبر ويملا المساحة الفاضية قد إيه بالنسبة لباقي العناصر. القيمة الافتراضية 0 (يعني مش هيكبر). لو أدينا عنصر قيمة 2 وعنصر تاني قيمة 1، الأولاني هيكبر بمعدل الضعف مقارنة بالتاني عشان ياكلوا المساحة المتاحة.
+            </div>
+
+            <!-- Codes -->
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.input-fill-space</span> {
+  <span class="prop">flex-grow</span>: <span class="num">1</span>; <span class="cm">/* Consumes all remaining empty space / يملأ كل الفراغ المتبقي */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Standard Search Navbar: Input grows, buttons remain static size / شريط بحث علوي */</span>
+<span class="sel">.nav-container</span> {
+  <span class="prop">display</span>: <span class="str">flex</span>;
+  <span class="prop">align-items</span>: <span class="str">center</span>;
+}
+<span class="sel">.nav-logo</span> {
+  <span class="prop">flex-grow</span>: <span class="num">0</span>; <span class="cm">/* Keep original size / يحافظ على حجمه الأصلي */</span>
+}
+<span class="sel">.search-input</span> {
+  <span class="prop">flex-grow</span>: <span class="num">1</span>; <span class="cm">/* Takes all remaining space dynamically / يتمدد ليأخذ كل المساحة المتاحة */</span>
+}
+<span class="sel">.nav-btn</span> {
+  <span class="prop">flex-grow</span>: <span class="num">0</span>;
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 2: Fill the Bar / تحدي ملء المساحة</div>
+                <div class="callout-body">
+                  You have a navigation bar with a Logo and two links. Make the Logo stay on the left, and push the
+                  links to the far right using only <code>flex-grow</code>.
+                  <br><strong>Solution Hint:</strong> Apply a spacer wrapper class between Logo and Links with
+                  <code>flex-grow: 1</code>.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">عندك شريط تنقل (Navbar) فيه اللوجو ورابطين. خلي اللوجو يفضل ع الشمال والروابط تتزق لأقصى اليمين باستخدام الـ <code>flex-grow</code> بس.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- flex-shrink -->
+          <div class="card">
+            <h4 style="color:var(--accent-cyan)">3. flex-shrink</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Determines how much an element shrinks to prevent
+                container overflow when spacing is tight.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To safeguard layout layout boundaries and prevent
+                elements from breaking out of containers.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Abolished overflow scroll issues and text break
+                errors in compact row layouts.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> To lock sizing of profile avatars, badges, or card icons
+                so they never squeeze or morph when screen size scales down.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> When wrapping is allowed
+                (<code>flex-wrap: wrap</code>), as items should wrap down to the next row instead of squeezing.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Wondering why icons turn oval. That's because
+                default <code>flex-shrink: 1</code> is compressing them. Prevent it by setting
+                <code>flex-shrink: 0</code>.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Set <code>flex-shrink: 0</code> on any decorative
+                shape or image block that must retain circular proportions.</li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike `min-width`, <code>flex-shrink: 0</code> is
+                flexbox-native, meaning it won't break parent flex container limits.</li>
+            </ul>
+            <div class="arabic">
+              <strong>flex-shrink:</strong> بتحدد العنصر ينكمش ويصغر قد إيه لما المساحة تضيق وميكفيش العناصر كلها جوة الأب. القيمة الافتراضية 1 (يعني العناصر بتكش بالتساوي). لو أديته 0، بتمنع العنصر ده إنه يصغر أو يكش نهائي (زي صور الأفاتار أو الأيقونات).
+            </div>
+
+            <!-- Codes -->
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.icon-circle</span> {
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>; <span class="cm">/* Never shrinks or morphs / يمنع العنصر تماماً من الانكماش والتغير */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Comment widget list: Avatar stays static circular, text shrinks and wraps / قائمة التعليقات */</span>
+<span class="sel">.comment-box</span> {
+  <span class="prop">display</span>: <span class="str">flex</span>;
+  <span class="prop">gap</span>: <span class="num">16px</span>;
+}
+<span class="sel">.user-thumbnail</span> {
+  <span class="prop">width</span>: <span class="num">60px</span>;
+  <span class="prop">height</span>: <span class="num">60px</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>; <span class="cm">/* Keeps avatar perfectly circular / يحافظ على شكل الأفاتار دائري تماماً */</span>
+}
+<span class="sel">.comment-text</span> {
+  <span class="prop">flex-grow</span>: <span class="num">1</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">1</span>; <span class="cm">/* Text box will shrink if screen goes narrow / ينكمش صندوق النص للتكيف */</span>
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 3: Freeze the Icon / تحدي تثبيت الأيقونة</div>
+                <div class="callout-body">
+                  You have a card showing a badge on the left side and details on the right. Stop the badge from
+                  shrinking below <code>80px</code> width when responsive layouts collapse.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">عندك كارت فيه شارة (badge) ع الشمال وتفاصيل ع اليمين. امنع الشارة دي إنها تكش أو تصغر عن عرض <code>80px</code> لما الشاشة تصغر.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- flex-basis -->
+          <div class="card">
+            <h4 style="color:var(--accent-cyan)">4. flex-basis</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Sets the initial starting width of a flex item before
+                growth or shrinkage computations are applied.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To replace standard width/height properties inside
+                flex models, since parent flex direction changes axes dynamically.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Solved axes dependency confusion (width on row
+                layouts vs height on column layouts).</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> To establish initial base percentages or pixel baselines
+                (e.g. setting sidebar initial width to <code>280px</code>).</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> Do not set a strict pixel <code>flex-basis</code>
+                if you want the layout to remain purely percentage-fluid without using media queries.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Forgetting that <code>flex-basis</code> overrides
+                <code>width</code> (in row) or <code>height</code> (in column). Do not use both on the same selector as
+                it causes redundancy.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Set <code>flex-basis: 0%</code> if you want items to
+                size purely relative to <code>flex-grow</code> proportions.</li>
+              <li><strong>Comparison / المقارنة:</strong> <code>width</code> is absolute, while <code>flex-basis</code>
+                represents a *recommendation size* that the browser adjusts dynamically using shrink and grow values.
+              </li>
+            </ul>
+            <div class="arabic">
+              <strong>flex-basis:</strong> بتحدد العرض أو الحجم المبدئي للعنصر قبل ما ينكمش أو يكبر. دي البديل المباشر لـ <code>width</code> (لو إحنا شغالين row) أو الـ <code>height</code> (لو شغالين column). القيمة الافتراضية ليها <code>auto</code>.
+            </div>
+
+            <!-- Codes -->
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.column-left</span> {
+  <span class="prop">flex-basis</span>: <span class="num">300px</span>; <span class="cm">/* Starting default size basis / الحجم الأساسي المبدئي 300 بكسل */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Three columns grid layout inside landing pages / تخطيط أعمدة متساوية */</span>
+<span class="sel">.row-grid</span> {
+  <span class="prop">display</span>: <span class="str">flex</span>;
+}
+<span class="sel">.col-item</span> {
+  <span class="prop">flex-basis</span>: <span class="num">33.33%</span>; <span class="cm">/* Base size is split equally / تقسيم مساحة البداية بالتساوي */</span>
+  <span class="prop">flex-grow</span>: <span class="num">1</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">1</span>;
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 4: Sidebar Baseline / تحدي تثبيت العمود الجانبي مبدئياً</div>
+                <div class="callout-body">
+                  Write a class configuration to initialize a Left Navigation Drawer with a starting base layout size of
+                  <code>250px</code>.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">اكتب كلاس يجهز القائمة الجانبية بحجم مبدئي <code>250px</code>.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- flex shorthand -->
+          <div class="card">
+            <h4 style="color:var(--accent-cyan)">5. flex shorthand</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Shortened syntax that combines <code>grow</code>,
+                <code>shrink</code>, and <code>basis</code>.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To speed up writing rules and force standard layout
+                practices across engines.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Solved conflict bugs where browsers applied
+                varying defaults to individual un-declared flex properties.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> <strong>Always.</strong> W3C guidelines recommend using
+                the shorthand instead of individual properties.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> None. Shorthand syntax is always preferred.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Writing <code>flex: 1</code> and not understanding
+                that it changes default <code>flex-basis</code> to <code>0%</code> instead of <code>auto</code>.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Use clean configurations like <code>flex: 1</code>
+                (distribute equal space), <code>flex: auto</code> (grow/shrink based on content), or
+                <code>flex: none</code> (same as 0 0 auto).</li>
+              <li><strong>Comparison / المقارنة:</strong> Writing <code>flex: 1 0 auto</code> is much shorter and safer
+                than writing three separate property declarations.</li>
+            </ul>
+            <div class="arabic">
+              <strong>flex shorthand:</strong> بتلم الخصائص التلاتة (grow, shrink, basis) مع بعض في سطر واحد. <strong>أفضل ممارسة:</strong> استخدم الاختصار ده دايماً عشان تريح نفسك وتمنع أي مشاكل توافقية في المتصفحات. التركيبة بتاعتها: <code>flex: [grow] [shrink] [basis]</code>. والاختصار المشهور جداً <code>flex: 1</code> بيساوي <code>1 1 0%</code> وده بيخلي كل العناصر تتقسم بالتساوي بالظبط.
+            </div>
+
+            <!-- Codes -->
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.equal-flexible-box</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>; <span class="cm">/* Equivalent to: flex-grow: 1; flex-shrink: 1; flex-basis: 0%; */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Split card design where media is fixed and body consumes rest / تقسيم بطاقة محتوى */</span>
+<span class="sel">.premium-post-card</span> {
+  <span class="prop">display</span>: <span class="str">flex</span>;
+}
+<span class="sel">.card-media</span> {
+  <span class="prop">flex</span>: <span class="str">none</span>; <span class="cm">/* Same as: 0 0 auto. Stays static content size / لا ينمو ولا ينكمش */</span>
+  <span class="prop">width</span>: <span class="num">150px</span>;
+}
+<span class="sel">.card-body</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>; <span class="cm">/* Takes all remaining space dynamically / يأخذ المساحة المتبقية كاملة */</span>
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 5: Optimize with Shorthand / تحدي الاختصارات</div>
+                <div class="callout-body">
+                  Convert the following separate styles into a single line W3C shorthand statement:
+                  <br><code>flex-grow: 2; flex-shrink: 0; flex-basis: 300px;</code>
+                  <br>
+                  <span style="font-family:var(--font-arabic)">حول التنسيقات التلاتة الفردية اللي فوق دي لسطر واحد مختصر ومكتوب صح.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Flex Interactive Playground -->
+        <section class="section-block">
+          <h3><span class="icon">&#127918;</span> Interactive Sandbox / تجربة تفاعلية</h3>
+          <p>Modify the sliders below to see in real-time how the child properties affect the boxes inside a Flex
+            container. Observe the calculations.</p>
+          <div class="sandbox">
+            <div class="flex-sandbox-container" id="flexSandboxContainer">
+              <div class="flex-sandbox-item" id="flexItem1">
+                <div class="item-label">Box 1</div>
+                <div class="item-details">Calculating...</div>
+              </div>
+              <div class="flex-sandbox-item" id="flexItem2">
+                <div class="item-label">Box 2</div>
+                <div class="item-details">Calculating...</div>
+              </div>
+              <div class="flex-sandbox-item" id="flexItem3">
+                <div class="item-label">Box 3</div>
+                <div class="item-details">Calculating...</div>
+              </div>
+            </div>
+
+            <div class="flex-controls-grid">
+              <!-- Box 1 controls -->
+              <div class="flex-control-card">
+                <h5>Box 1 (Indigo)</h5>
+                <div class="control-group">
+                  <label>order: <span id="val-order1">0</span></label>
+                  <input type="range" id="order1" min="-3" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-grow: <span id="val-grow1">0</span></label>
+                  <input type="range" id="grow1" min="0" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-shrink: <span id="val-shrink1">1</span></label>
+                  <input type="range" id="shrink1" min="0" max="5" value="1">
+                </div>
+                <div class="control-group">
+                  <label>flex-basis:</label>
+                  <input type="text" id="basis1" value="auto">
+                </div>
+              </div>
+
+              <!-- Box 2 controls -->
+              <div class="flex-control-card">
+                <h5>Box 2 (Cyan)</h5>
+                <div class="control-group">
+                  <label>order: <span id="val-order2">0</span></label>
+                  <input type="range" id="order2" min="-3" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-grow: <span id="val-grow2">0</span></label>
+                  <input type="range" id="grow2" min="0" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-shrink: <span id="val-shrink2">1</span></label>
+                  <input type="range" id="shrink2" min="0" max="5" value="1">
+                </div>
+                <div class="control-group">
+                  <label>flex-basis:</label>
+                  <input type="text" id="basis2" value="auto">
+                </div>
+              </div>
+
+              <!-- Box 3 controls -->
+              <div class="flex-control-card">
+                <h5>Box 3 (Pink)</h5>
+                <div class="control-group">
+                  <label>order: <span id="val-order3">0</span></label>
+                  <input type="range" id="order3" min="-3" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-grow: <span id="val-grow3">0</span></label>
+                  <input type="range" id="grow3" min="0" max="5" value="0">
+                </div>
+                <div class="control-group">
+                  <label>flex-shrink: <span id="val-shrink3">1</span></label>
+                  <input type="range" id="shrink3" min="0" max="5" value="1">
+                </div>
+                <div class="control-group">
+                  <label>flex-basis:</label>
+                  <input type="text" id="basis3" value="auto">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 1 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 1 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. What is the default value of the <code>flex-grow</code> property?
+              <span class="ar-q">ما هي القيمة الافتراضية لخاصية <code>flex-grow</code>؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">1</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">0 (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">auto</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">none</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. How do you prevent a flex item from shrinking under any circumstances?
+              <span class="ar-q">كيف تمنع عنصر flex من الانكماش تحت أي ظرف؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">flex-shrink: 1;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">flex-shrink: 0; (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">flex-basis: 0;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">order: -1;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. Which property replaces <code>width</code> in a horizontal flex layout?
+              <span class="ar-q">أي خاصية تحل محل العرض (width) في نظام التوزيع الأفقي للـ flex؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">flex-grow</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">flex-basis (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">align-self</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">order</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. What does the shorthand statement <code>flex: 2;</code> expand to?
+              <span class="ar-q">ما هو تفصيل الاختصار <code>flex: 2;</code>؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">flex-grow: 2; flex-shrink: 2; flex-basis: 2;
+              </div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">flex-grow: 2; flex-shrink: 1; flex-basis: 0%;
+                (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">flex-grow: 1; flex-shrink: 2; flex-basis:
+                auto;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">order: 2;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. Visual ordering with the <code>order</code> property affects which of the following?
+              <span class="ar-q">ترتيب العناصر باستخدام خاصية <code>order</code> يؤثر على أي مما يلي؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">HTML source code sequence / ترتيب الأكواد في
+                ملف HTML</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Screen readers read-out sequence / قراءة قارئ
+                الشاشة للمكفوفين</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Visual presentation only / العرض البصري على
+                الشاشة فقط (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Tab index navigation sequence / ترتيب التنقل
+                عبر زر Tab</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 1 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 1: The Asymmetric Layout / تحدي التخطيط غير المتماثل</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> You have 3 boxes. Box 1 should take a baseline size of <code>200px</code> and
+                not shrink. Box 2 and 3 should fill the rest of the space, but Box 3 should take double the remaining
+                space compared to Box 2.</p>
+              <div class="arabic">
+                <strong>المطلوب:</strong> لديك 3 صناديق. الصندوق الأول يبدأ بعرض <code>200px</code> ولا ينكمش أبداً.
+                الصندوقان الثاني والثالث يملآن بقية المساحة، لكن الصندوق الثالث يأخذ ضعف المساحة المتبقية مقارنة
+                بالصندوق الثاني.
+              </div>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="sel">.item-1</span> {
+  <span class="prop">flex</span>: <span class="num">0</span> <span class="num">0</span> <span class="num">200px</span>; <span class="cm">/* grow: 0, shrink: 0, basis: 200px */</span>
+}
+<span class="sel">.item-2</span> {
+  <span class="prop">flex-grow</span>: <span class="num">1</span>;
+}
+<span class="sel">.item-3</span> {
+  <span class="prop">flex-grow</span>: <span class="num">2</span>;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 2: HIDING ELEMENTS -->
+      <div class="topic-section" id="topic2">
+        <div class="topic-header">
+          <div class="topic-number">2</div>
+          <h2>Hiding Elements / إخفاء العناصر في CSS</h2>
+          <p class="topic-subtitle">Understand the critical differences between display:none, visibility:hidden,
+            opacity:0, and pointer-events:none.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#128065;</span> Why & When / لماذا ومتى نخفي العناصر؟</h3>
+          <p>In modern web applications, we frequently show and hide elements based on user interaction (menus, modals,
+            tooltips, loading indicators). Choosing the wrong technique can lead to accessibility bugs, broken layouts,
+            or broken transition animations.</p>
+          <div class="arabic">
+            في تطبيقات الويب الحديثة، نقوم بإخفاء وإظهار العناصر بكثرة بناءً على تفاعل المستخدم (القوائم، النوافذ
+            المنبثقة، التلميحات). اختيار الطريقة الخاطئة قد يسبب مشاكل في إمكانية الوصول للموقع (Accessibility)، أو يكسر
+            التصميم البصري، أو يعطل الحركات الانتقالية (Transitions).
+          </div>
+        </section>
+
+        <!-- Detailed 12-point Breakdown for Hiding Properties -->
+        <section class="section-block">
+          <h3>Deep-Dive Hiding Methods / تفصيل تقنيات الإخفاء الأربعة</h3>
+
+          <!-- display: none -->
+          <div class="card">
+            <h4 style="color:var(--accent-pink)">display: none;</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Completely removes the element from the layout flow.
+                It becomes invisible and takes zero pixels.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To allow toggling content visibility on demand (e.g.
+                tabs systems) without rendering spaces.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Replaced the old practice of shifting elements
+                coordinates to `-9999px` off-screen, which caused performance rendering lags.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> Dropdown menus, closed modals, or hidden tabs that are
+                not currently active.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> When you want to animate a smooth transition (like
+                fade-in), because the property is binary and cannot interpolate.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Forgetting that search engine bots might ignore
+                content styled with <code>display: none</code> on load, harming SEO if not handled.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Combine it with aria-hidden tags to prevent
+                accessibility readers from processing hidden structures.</li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike opacity, <code>display: none</code> recalculates layout
+                reflow, shifting surrounding components.</li>
+            </ul>
+            <div class="arabic">
+              <strong>display: none:</strong> بتشيل العنصر تماماً من الصفحة والمساحة بتاعته بتختفي كأنه مش موجود خالص. ومينفعش تعمل معاه حركات انتقالية (transitions) لأنه إما موجود أو مش موجود.
+            </div>
+
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.hidden-panel</span> {
+  <span class="prop">display</span>: <span class="str">none</span>; <span class="cm">/* Completely removed / يختفي كلياً ولا يحجز مساحة */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Responsive mobile menu toggle / إخفاء القائمة في شاشات الديسكتوب */</span>
+<span class="sel">.mobile-hamburger</span> {
+  <span class="prop">display</span>: <span class="str">block</span>;
+}
+
+<span class="sel">@media</span> (<span class="prop">min-width</span>: <span class="num">1024px</span>) {
+  <span class="sel">.mobile-hamburger</span> {
+    <span class="prop">display</span>: <span class="str">none</span>; <span class="cm">/* Removed completely on desktop / يختفي تماماً في الشاشات الكبيرة */</span>
+  }
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 6: Hide the Modal / تحدي إخفاء النافذة</div>
+                <div class="callout-body">
+                  Create an active toggle state class `.modal.is-closed` that completely collapses the modal overlay.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">اكتب كلاس يخفي النافذة المنبثقة (Modal Overlay) تماماً لما نقفلها.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- visibility: hidden -->
+          <div class="card">
+            <h4 style="color:var(--accent-pink)">visibility: hidden;</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Hides the element visually but preserves the space it
+                occupies in the layout.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To allow developers to hide items without causing
+                shifts in surrounding elements.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Prevented layout recalculation (reflow) which
+                triggers expensive CPU renders.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> Loading icons that appear inside forms, error labels
+                below input elements.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> General layouts toggle (e.g. mobile drawer menu)
+                where empty layout space is unacceptable.</li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Expecting hidden form inputs to block focus
+                navigation. Users can still tab key focus into hidden visibility fields if not careful.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Set <code>tabindex="-1"</code> to prevent focus issues
+                when hidden.</li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike display, <code>visibility: hidden</code> respects
+                layout geometries, leaving a blank hole.</li>
+            </ul>
+            <div class="arabic">
+              <strong>visibility: hidden:</strong> بيخفي العنصر عن العين بس بيفضل <strong>حاجز مكانه ومساحته بالكامل</strong> في الصفحة كأنه مكان فاضي.
+            </div>
+
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.hidden-but-reserves-space</span> {
+  <span class="prop">visibility</span>: <span class="str">hidden</span>; <span class="cm">/* Invisible but layout holds / غير مرئي لكن المساحة محجوزة */</span>
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Error labels below form inputs to prevent input boxes from moving up/down / إظهار وإخفاء رسالة الخطأ دون اهتزاز الحقول */</span>
+<span class="sel">.error-label</span> {
+  <span class="prop">color</span>: <span class="str">var(--accent-red)</span>;
+  <span class="prop">height</span>: <span class="num">20px</span>;
+  <span class="prop">visibility</span>: <span class="str">hidden</span>; <span class="cm">/* Holds space so form doesn't shrink / يحجز المساحة لمنع اهتزاز التصميم */</span>
+}
+<span class="sel">.error-label.show</span> {
+  <span class="prop">visibility</span>: <span class="str">visible</span>;
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 7: Error Placeholder / تحدي تثبيت مكان الخطأ</div>
+                <div class="callout-body">
+                  Write a class to ensure that a tooltip helper bubble takes layout height space but is hidden until
+                  focus is triggered.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">اكتب كلاس يضمن إن مربع المساعدة (Tooltip Bubble) يفضل حاجز مكانه تحت الإدخال بس يكون مخفي لحد ما نقف عليه بالماوس.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- opacity: 0 -->
+          <div class="card">
+            <h4 style="color:var(--accent-pink)">opacity: 0;</h4>
+            <ul>
+              <li><strong>Simple Concept / الفكرة ببساطة:</strong> Adjusts transparency levels of elements. Opacity 0
+                makes the element invisible but active.</li>
+              <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To enable animations, fading transitions, and opacity
+                adjustments.</li>
+              <li><strong>Problem Solved / المشكلة المحلولة:</strong> Allowed CSS transitions to interpolate
+                transparency values dynamically.</li>
+              <li><strong>When to Use / متى تستخدمها:</strong> Hover image filters, fading popup modals, sliding visual
+                alerts.</li>
+              <li><strong>When NOT to Use / متى لا تستخدمها:</strong> Hiding elements that shouldn't be interactable.
+                <strong>Users can still click on elements styled with opacity: 0!</strong></li>
+              <li><strong>Beginner Mistakes / أخطاء شائعة:</strong> Wondering why a hidden button is still being
+                clicked, blocking elements below it.</li>
+              <li><strong>Best Practices / أفضل ممارسات:</strong> Combine <code>opacity: 0</code> with
+                <code>pointer-events: none</code> or <code>visibility: hidden</code> to disable clicks when faded out.
+              </li>
+              <li><strong>Comparison / المقارنة:</strong> Unlike display and visibility, <code>opacity</code> works
+                natively with GPU acceleration rendering for high-performance animations.</li>
+            </ul>
+            <div class="arabic">
+              <strong>opacity: 0:</strong> بيخلي العنصر شفاف بنسبة 100% بس بيفضل موجود في مكانه وكمان <strong>ينفع تضغط عليه بالماوس!</strong> الخاصية دي ممتازة عشان نعمل حركات اختفاء وظهور تدريجي (fade transitions).
+            </div>
+
+            <h5>Simple Code / مثال بسيط:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.fade-box</span> {
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">transition</span>: <span class="str">opacity 0.4s ease</span>;
+}
+<span class="sel">.fade-box:hover</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+}</code></pre>
+            </div>
+
+            <h5>Real-world Component Example / مثال عملي:</h5>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="cm">/* Premium fade-in dropdown card overlay / غطاء شفاف تظهر معلوماته عند التمرير بنعومة */</span>
+<span class="sel">.product-image-container</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+}
+<span class="sel">.image-overlay-info</span> {
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>; <span class="prop">height</span>: <span class="num">100%</span>;
+  <span class="prop">background</span>: <span class="fn">rgba</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.8</span>);
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">pointer-events</span>: <span class="str">none</span>; <span class="cm">/* Blocks accidental clicks / يمنع الضغط بالخطأ وهو مخفي */</span>
+  <span class="prop">transition</span>: <span class="str">all 0.3s ease</span>;
+}
+<span class="sel">.product-image-container:hover .image-overlay-info</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+  <span class="prop">pointer-events</span>: <span class="str">auto</span>; <span class="cm">/* Enable clicks on hover / يسمح بالضغط عند الظهور */</span>
+}</code></pre>
+            </div>
+
+            <!-- Challenge -->
+            <div class="callout tip">
+              <div class="callout-icon">&#128161;</div>
+              <div class="callout-content">
+                <div class="callout-title">Challenge 8: Fade-out Overlay / تحدي الاختفاء التدرجي</div>
+                <div class="callout-body">
+                  Write a class for an alert widget that fades out smoothly over 0.5 seconds on hover, but disables
+                  click events immediately once hover starts.
+                  <br>
+                  <span style="font-family:var(--font-arabic)">اكتب كلاس لصندوق تنبيه يختفي بالتدريج (fade out) في نص ثانية لما تقف عليه بالماوس ويمنع الضغط عليه تماماً وهو بيختفي.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="section-block">
+          <h3>Comparison Table / جدول مقارنة طرق الإخفاء</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Takes Layout Space?</th>
+                  <th>Clickable/Interactable?</th>
+                  <th>Affects Layout?</th>
+                  <th>Supports Transitions/Animations?</th>
+                  <th>Common Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>display: none;</code></td>
+                  <td>No</td>
+                  <td>No</td>
+                  <td>Yes (re-calculates layout)</td>
+                  <td>No</td>
+                  <td>Toggling tabs, sidebars, mobile menus.</td>
+                </tr>
+                <tr>
+                  <td><code>visibility: hidden;</code></td>
+                  <td>Yes</td>
+                  <td>No</td>
+                  <td>No</td>
+                  <td>Partial (only visible status)</td>
+                  <td>Hiding elements but reserving space.</td>
+                </tr>
+                <tr>
+                  <td><code>opacity: 0;</code></td>
+                  <td>Yes</td>
+                  <td>Yes (still clickable!)</td>
+                  <td>No</td>
+                  <td>Yes (Fully animates)</td>
+                  <td>Fade-in/Fade-out hover effects.</td>
+                </tr>
+                <tr>
+                  <td><code>pointer-events: none;</code></td>
+                  <td>Yes</td>
+                  <td>No (clicks pass through)</td>
+                  <td>No</td>
+                  <td>Yes (doesn't hide element visually)</td>
+                  <td>Making SVGs or overlays unclickable.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Hiding Interactive Sandbox -->
+        <section class="section-block">
+          <h3><span class="icon">&#127918;</span> Interactive Sandbox / تجربة عملية</h3>
+          <p>Click the buttons below to toggle classes on the <strong>Pink Target Box</strong>. Test if you can click
+            the box or if it takes layout space.</p>
+          <div class="sandbox">
+            <div class="hide-btn-group">
+              <button class="hide-btn active" data-action="none">Normal (Visible)</button>
+              <button class="hide-btn" data-action="display">display: none</button>
+              <button class="hide-btn" data-action="visibility">visibility: hidden</button>
+              <button class="hide-btn" data-action="opacity">opacity: 0</button>
+              <button class="hide-btn" data-action="pointer">pointer-events: none</button>
+            </div>
+
+            <div class="hide-sandbox-container">
+              <div class="hide-sandbox-item">Left Box (Space checker)</div>
+              <div class="hide-sandbox-item target" id="hideTarget"
+                onclick="alert('🎉 Clicked Target Box! Element is accessible!')">
+                <span>Target Box (Click me)</span>
+                <span style="font-size:0.75rem;opacity:0.8">// Target content</span>
+              </div>
+              <div class="hide-sandbox-item">Right Box (Space checker)</div>
+            </div>
+
+            <div class="hide-sandbox-output" id="hideOutput">
+              // Element is completely visible.
+              // Takes space: YES
+              // Clickable: YES
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 2 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 2 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. Which property hides the element and completely collapses the space it occupies?
+              <span class="ar-q">أي من الخصائص تخفي العنصر وتزيله تماماً من المساحة التي يشغلها؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">opacity: 0;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">display: none; (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">visibility: hidden;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">pointer-events: none;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. What happens if you click an area occupied by an element styled with <code>opacity: 0;</code>?
+              <span class="ar-q">ماذا يحدث لو قمت بالضغط على مساحة يشغلها عنصر منسق بـ <code>opacity: 0;</code>؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Nothing happens.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">The click is registered and fires events.
+                (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">The browser throws a JS error.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">The element becomes visible.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. Which property allows clicks to "pass through" an element to whatever is underneath?
+              <span class="ar-q">أي خاصية تجعل النقرات "تمر من خلال" العنصر لتصل للعنصر الذي تحته؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">visibility: hidden;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">display: none;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">pointer-events: none; (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">opacity: 0;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. Why is <code>display: none;</code> unsuitable for fade-in animations?
+              <span class="ar-q">لماذا لا تصلح خاصية <code>display: none;</code> لعمل حركات الظهور التدرجي
+                (fade-in)؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Because it cannot be interpolated (no
+                mid-states between none and block). (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Because it takes too much CPU memory.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Because it shifts scroll positions.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Because it doesn't support width rules.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. How can we make a fade animation that becomes unclickable after fade-out completes?
+              <span class="ar-q">إزاي نقدر نعمل حركة تلاشي تخلي العنصر غير قابل للنقر بعد ما يختفي خالص؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Use display: none only.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Use opacity: 0 only.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Combine opacity with visibility: hidden or
+                pointer-events: none. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Use pointer-events: auto.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 2 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 2: Create a Hover-to-Reveal Overlay / تحدي إظهار الغطاء عند التمرير</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> Design an overlay inside a card that is completely invisible and unclickable at
+                first. When the user hovers over the card, the overlay should smoothly fade in and become clickable.</p>
+              <div class="arabic">
+                <strong>المطلوب:</strong> تصميم غطاء (Overlay) داخل بطاقة يكون غير مرئي وغير قابل للضغط في البداية. عند
+                تمرير الماوس فوق البطاقة، يظهر الغطاء بنعومة ويصبح قابلاً للنقر.
+              </div>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="sel">.overlay</span> {
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">pointer-events</span>: <span class="str">none</span>; <span class="cm">/* blocks clicks while hidden */</span>
+  <span class="prop">transition</span>: <span class="str">opacity 0.3s ease</span>;
+}
+<span class="sel">.card:hover .overlay</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+  <span class="prop">pointer-events</span>: <span class="str">auto</span>; <span class="cm">/* enables clicks when shown */</span>
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 3: PSEUDO ELEMENTS -->
+      <div class="topic-section" id="topic3">
+        <div class="topic-header">
+          <div class="topic-number">3</div>
+          <h2>Pseudo-elements (::before & ::after) / العناصر الزائفة</h2>
+          <p class="topic-subtitle">Learn to decorate elements, create icons, overlays, hover effects, and custom
+            indicators without bloated HTML markup.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#10024;</span> Concept & Why It Exists / المفهوم العام للـ pseudo elements</h3>
+          <ul>
+            <li><strong>Simple Concept / الفكرة ببساطة:</strong> CSS-generated virtual boxes that appear inside the
+              targeted element, used purely for decorative purposes.</li>
+            <li><strong>Why Created / لماذا تم إنشاؤها:</strong> To keep HTML documents strictly semantic (clean text,
+              headers, links) without polluting code with empty markup tags like
+              <code>&lt;span class="icon"&gt;&lt;/span&gt;</code> just to show small circles, lines, or indicators.</li>
+            <li><strong>Problem Solved / المشكلة المحلولة:</strong> Saved developer time and improved web performance by
+              reducing the complexity of DOM node counts.</li>
+            <li><strong>Can they work without content? / هل يعملان بدون content:</strong> No. The browser requires the
+              <code>content</code> property (even if empty like <code>content: ""</code>) to trigger rendering.</li>
+            <li><strong>Can we build icons with them? / هل نصنع أيقونات بها:</strong> Yes, by using Unicode characters
+              (e.g. <code>content: "\27A1"</code>) or injecting custom icons.</li>
+            <li><strong>Can we make overlays? / هل نعمل غطاء للصور:</strong> Yes, by assigning the parent
+              <code>position: relative</code> and styling the pseudo-element with
+              <code>position: absolute; top:0; left:0; width:100%; height:100%</code>.</li>
+            <li><strong>Can we build tooltips? / هل يمكن عمل تلميحات:</strong> Yes, using the CSS function
+              <code>content: attr(data-tooltip)</code> to fetch content dynamically from HTML attributes.</li>
+          </ul>
+          <div class="arabic">
+            <strong>العناصر الزائفة (Pseudo-elements):</strong> دي عبارة عن مربعات وهمية الـ CSS بيعملهالك جوة العنصر بتاعك. بنستخدمها عشان نزين الصفحة من غير ما نضيف وسوم HTML زيادة ملهاش لازمة. أهم حاجة: لازم تكتب <code>content</code> عشان تشتغل، من غيرها مش هتظهر خالص!
+          </div>
+        </section>
+
+        <!-- 10 Progressive Code Examples -->
+        <section class="section-block">
+          <h3>10 Progressive Code Examples / عشرة أمثلة برمجية تفصيلية متدرجة</h3>
+
+          <!-- Ex 1 -->
+          <div class="card">
+            <h4>1. Custom bullet marks / رموز مخصصة للمقالات</h4>
+            <p>Adding custom unicode arrows before list items.</p>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">ul li::before</span> {
+  <span class="prop">content</span>: <span class="str">"➔ "</span>; <span class="cm">/* Prepend arrow / يضيف السهم قبل النص */</span>
+  <span class="prop">color</span>: <span class="str">var(--accent-cyan)</span>;
+  <span class="prop">margin-right</span>: <span class="num">8px</span>;
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 2 -->
+          <div class="card">
+            <h4>2. Animated link underline slide / سطر الرابط المنزلق</h4>
+            <p>Underline that expands smoothly from center on hover.</p>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.hover-link</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+}
+<span class="sel">.hover-link::after</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">bottom</span>: <span class="num">-2px</span>; <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>; <span class="prop">height</span>: <span class="num">2px</span>;
+  <span class="prop">background</span>: <span class="str">var(--accent-pink)</span>;
+  <span class="prop">transform</span>: <span class="fn">scaleX</span>(<span class="num">0</span>); <span class="cm">/* Hidden by default / مخفي افتراضياً */</span>
+  <span class="prop">transition</span>: <span class="str">transform 0.3s ease</span>;
+}
+<span class="sel">.hover-link:hover::after</span> {
+  <span class="prop">transform</span>: <span class="fn">scaleX</span>(<span class="num">1</span>); <span class="cm">/* Slides out to full / يتمدد للمساحة الكاملة عند التمرير */</span>
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 3 -->
+          <div class="card">
+            <h4>3. Title bottom gradient bar / زخرفة العناوين بالتدريجات</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">h2.decorated-title</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+}
+<span class="sel">h2.decorated-title::after</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">bottom</span>: <span class="num">-8px</span>; <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">60px</span>; <span class="prop">height</span>: <span class="num">4px</span>;
+  <span class="prop">background</span>: <span class="fn">linear-gradient</span>(<span class="num">90deg</span>, <span class="str">var(--accent-blue)</span>, <span class="str">transparent</span>);
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 4 -->
+          <div class="card">
+            <h4>4. Profile floating badge / شارة عائمة فوق الصورة الشخصية</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.avatar-wrap</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+  <span class="prop">display</span>: <span class="str">inline-block</span>;
+}
+<span class="sel">.avatar-wrap::after</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">top</span>: <span class="num">2px</span>; <span class="prop">right</span>: <span class="num">2px</span>;
+  <span class="prop">width</span>: <span class="num">12px</span>; <span class="prop">height</span>: <span class="num">12px</span>;
+  <span class="prop">background</span>: <span class="str">var(--accent-green)</span>; <span class="cm">/* Online green indicator / مؤشر الاتصال الأخضر */</span>
+  <span class="prop">border-radius</span>: <span class="num">50%</span>;
+  <span class="prop">border</span>: <span class="num">2px solid var(--bg-primary)</span>;
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 5 -->
+          <div class="card">
+            <h4>5. Dynamic Attribute Tooltip / تلميح ديناميكي بالمتغيرات</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.btn-tooltip</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+}
+<span class="sel">.btn-tooltip::after</span> {
+  <span class="prop">content</span>: <span class="fn">attr</span>(<span class="str">data-tip</span>); <span class="cm">/* Pulls string from data attribute / يسحب النص من الخاصية المخصصة */</span>
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">bottom</span>: <span class="num">120%</span>; <span class="prop">left</span>: <span class="num">50%</span>;
+  <span class="prop">transform</span>: <span class="fn">translateX</span>(<span class="num">-50%</span>);
+  <span class="prop">background</span>: <span class="str">var(--bg-secondary)</span>;
+  <span class="prop">color</span>: <span class="str">#fff</span>;
+  <span class="prop">padding</span>: <span class="num">6px 12px</span>;
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">transition</span>: <span class="str">opacity 0.2s ease</span>;
+}
+<span class="sel">.btn-tooltip:hover::after</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 6 -->
+          <div class="card">
+            <h4>6. Dark glass overlay cover / غطاء زجاجي مظلم للصور</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.image-overlay-box::before</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>; <span class="prop">height</span>: <span class="num">100%</span>;
+  <span class="prop">background</span>: <span class="fn">rgba</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">0</span>, <span class="num">0.5</span>); <span class="cm">/* Semi-transparent tint / طبقة سوداء شفافة */</span>
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 7 -->
+          <div class="card">
+            <h4>7. CSS Animated Loading Spinner / دائرة التحميل المتحركة</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.spinner-btn::after</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">width</span>: <span class="num">16px</span>; <span class="prop">height</span>: <span class="num">16px</span>;
+  <span class="prop">border</span>: <span class="num">2px solid rgba(255,255,255,0.2)</span>;
+  <span class="prop">border-top-color</span>: <span class="str">var(--accent-cyan)</span>;
+  <span class="prop">border-radius</span>: <span class="num">50%</span>;
+  <span class="prop">animation</span>: <span class="str">spin 0.6s linear infinite</span>;
+}
+<span class="sel">@keyframes spin</span> {
+  <span class="sel">to</span> { <span class="prop">transform</span>: <span class="fn">rotate</span>(<span class="num">360deg</span>); }
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 8 -->
+          <div class="card">
+            <h4>8. Button slide-in background decoration / خلفية الأزرار المتحركة</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.slide-btn</span> {
+  <span class="prop">position</span>: <span class="str">relative</span>;
+  <span class="prop">overflow</span>: <span class="str">hidden</span>;
+  <span class="prop">z-index</span>: <span class="num">1</span>;
+}
+<span class="sel">.slide-btn::before</span> {
+  <span class="prop">content</span>: <span class="str">""</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">-100%</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>; <span class="prop">height</span>: <span class="num">100%</span>;
+  <span class="prop">background</span>: <span class="str">var(--accent-blue)</span>;
+  <span class="prop">z-index</span>: <span class="num">-1</span>;
+  <span class="prop">transition</span>: <span class="str">left 0.3s ease</span>;
+}
+<span class="sel">.slide-btn:hover::before</span> {
+  <span class="prop">left</span>: <span class="num">0</span>; <span class="cm">/* Slide background overlay inside / تسحب الخلفية الجمالية للداخل */</span>
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 9 -->
+          <div class="card">
+            <h4>9. Blockquotes quotes / علامات الاقتباس الكبيرة تلقائياً</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">blockquote::before</span> {
+  <span class="prop">content</span>: <span class="str">"“"</span>; <span class="cm">/* Giant quote mark / علامة اقتباس ضخمة */</span>
+  <span class="prop">font-size</span>: <span class="num">4rem</span>;
+  <span class="prop">color</span>: <span class="str">var(--accent-pink)</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">top</span>: <span class="num">-20px</span>; <span class="prop">left</span>: <span class="num">10px</span>;
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Ex 10 -->
+          <div class="card">
+            <h4>10. Custom list step counters / عداد أرقام خطوات العمل المخصص</h4>
+            <div class="code-block">
+              <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+              <pre><code><span class="sel">.steps-list</span> {
+  <span class="prop">counter-reset</span>: <span class="str">custom-counter</span>;
+}
+<span class="sel">.steps-list li::before</span> {
+  <span class="prop">counter-increment</span>: <span class="str">custom-counter</span>;
+  <span class="prop">content</span>: <span class="str">"Step "</span> <span class="fn">counter</span>(<span class="str">custom-counter</span>) <span class="str">": "</span>;
+  <span class="prop">font-weight</span>: <span class="num">700</span>;
+  <span class="prop">color</span>: <span class="str">var(--accent-cyan)</span>;
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Premium Card Component Demo -->
+        <section class="section-block">
+          <h3><span class="icon">&#128187;</span> Fully Decorated Premium Card / بطاقة تعتمد على العناصر الزائفة</h3>
+          <p>This premium card has a neon top border, a dynamic floating background glow circle, and a button with a
+            slide-in background. All built via <code>::before</code> and <code>::after</code>.</p>
+
+          <div class="decorated-card">
+            <h4><span style="color:var(--accent-cyan)">::before</span> Premium Styling</h4>
+            <p>This layout uses CSS variables, glassmorphic boundaries, and pseudo-elements. The floating circle at the
+              top-right moves on hover.</p>
+            <button class="decorated-card-btn">Explore Features</button>
+          </div>
+        </section>
+
+        <!-- Topic 3 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 3 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. Which property must be present for a pseudo-element to render at all?
+              <span class="ar-q">إيه الخاصية اللي لازم تكتبها عشان الـ pseudo-element يظهر أصلاً؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">display</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">content (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">position</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. Can pseudo-elements be applied directly on self-closing tags like <code>&lt;img&gt;</code> or
+              <code>&lt;input&gt;</code>?
+              <span class="ar-q">ينفع نحط pseudo-elements على وسوم بتقفل لوحدها زي الـ img والـ input؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Yes, they work everywhere.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">No, because they render inside the content tags
+                (which replaced nodes don't have). (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Only on webkit engines.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Only ::after works on them.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. If you want a pseudo-element to serve purely as a background shape, what value do you give to
+              <code>content</code>?
+              <span class="ar-q">لو عايز الـ pseudo-element يشتغل كشكل خلفية بس من غير أي نص، هتحط إيه في الـ
+                <code>content</code>؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: null;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: "shape";</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">content: ""; (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: none;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. Where is <code>::before</code> placed inside the HTML structure relative to the parent?
+              <span class="ar-q">الـ <code>::before</code> بيتحط فين جوة العنصر الأب بالظبط؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Right before the opening tag of the parent.
+              </div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">As the very first child inside the parent
+                element. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">As the last child of the parent.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Before the element's background is rendered.
+              </div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. How can we access a custom HTML attribute (like <code>data-tooltip="Hello"</code>) inside a
+              pseudo-element?
+              <span class="ar-q">إزاي نجيب قيمة من attribute مخصص (زي <code>data-tooltip="Hello"</code>) جوة الـ
+                pseudo-element؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: var(--tooltip);</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">content: attr(data-tooltip); (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: getAttribute("data-tooltip");</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">content: "data-tooltip";</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 3 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 3: Custom Number Counter list / عداد أرقام مخصص بالـ CSS</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> Create a list of steps using CSS counters inside pseudo elements, eliminating
+                manual number typing in HTML.</p>
+              <div class="arabic">
+                <strong>المطلوب:</strong> عايزين نولد أرقام متسلسلة للخطوات أوتوماتيك باستخدام الـ CSS counters والـ pseudo elements من غير ما نكتب الأرقام دي بإيدينا في الـ HTML.
+              </div>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="sel">ol</span> {
+  <span class="prop">counter-reset</span>: <span class="str">step-counter</span>;
+  <span class="prop">list-style</span>: <span class="str">none</span>;
+}
+<span class="sel">li</span> {
+  <span class="prop">counter-increment</span>: <span class="str">step-counter</span>;
+  <span class="prop">position</span>: <span class="str">relative</span>;
+  <span class="prop">padding-left</span>: <span class="num">30px</span>;
+}
+<span class="sel">li::before</span> {
+  <span class="prop">content</span>: <span class="fn">counter</span>(<span class="str">step-counter</span>) <span class="str">"."</span>;
+  <span class="prop">position</span>: <span class="str">absolute</span>;
+  <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">color</span>: <span class="str">var(--accent-cyan)</span>;
+  <span class="prop">font-weight</span>: <span class="num">700</span>;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 4: BACKGROUNDS, GRADIENTS, OBJECT-FIT & VARIABLES -->
+      <div class="topic-section" id="topic4">
+        <div class="topic-header">
+          <div class="topic-number">4</div>
+          <h2>Background Systems & Color Formats / نظم الخلفيات والألوان</h2>
+          <p class="topic-subtitle">Master properties, Gradients, HSL vs HEX vs RGBA, CSS Variables, and the essential
+            difference between background-size and object-fit.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#127912;</span> Core Background & Color Properties / الأساسيات بالنقاط الـ 12</h3>
+          <p>Background properties in CSS allow us to design beautiful layers. However, students frequently confuse
+            <code>background-size</code> (for block backgrounds) with <code>object-fit</code> (for replaced DOM tags
+            like images).</p>
+          <div class="arabic">
+            تنسيق الخلفيات والألوان بيخلي شكل الموقع ممتاز. بس المشكلة إن أغلب الطلاب بيتلخبطوا بين الـ <code>background-size</code> (اللي بتتحكم في حجم خلفية الـ CSS بتاعة المربع) والـ <code>object-fit</code> (اللي بتتحكم في شكل واقتصاص صورة حقيقية مكتوبة كـ tag <code>&lt;img&gt;</code> في الـ HTML).
+          </div>
+        </section>
+
+        <!-- Color Formats Comparison -->
+        <section class="section-block">
+          <h3>Color Systems Compared / مقارنة نظم الألوان</h3>
+          <ul>
+            <li><strong>HEX (#ff007f):</strong> Hexadecimal notation, compact, works everywhere. Difficult to modify
+              opacity without modern HEX variants.</li>
+            <li><strong>RGB / RGBA (rgb(255, 0, 127) / rgba(255, 0, 127, 0.5)):</strong> Red, Green, Blue values. RGBA
+              adds Alpha (opacity) channel. Easy to read color density.</li>
+            <li><strong>HSL (hsl(330, 100%, 50%)):</strong> Hue (0-360 color wheel), Saturation, Lightness. Excellent
+              for developers to generate lighter/darker states programmatically.</li>
+            <li><strong>Opacity:</strong> A global element property. If applied, it makes the <strong>entire
+                element</strong> and all its children transparent. To make only background transparent, use <strong>RGBA
+                or HSL transparency</strong>.</li>
+          </ul>
+          <div class="arabic">
+            <strong>الفرق المهم جداً بين Opacity و RGBA:</strong> لو حطيت <code>opacity: 0.5</code> على مربع، المربع ده <strong>وكل الكلام والصور اللي جواه</strong> هيبقوا شفافين مع بعض. لكن لو استخدمت <code>background-color: rgba(0,0,0,0.5)</code>، الخلفية بس هي اللي هتكون شفافة، وهيفضل النص اللي فوقيها واضح وظاهر بألوانه الكاملة من غير أي تأثير.
+          </div>
+        </section>
+
+        <!-- CSS Variables, Gradients and Object fit -->
+        <section class="section-block">
+          <h3>CSS Variables & Gradient Engines / المتغيرات والتدريجات بالنقاط التعليمية</h3>
+          <div class="card-grid">
+            <!-- Variables -->
+            <div class="card">
+              <h4>CSS Variables (:root + var)</h4>
+              <p><strong>Concept:</strong> Store reusable color variables globally. Helps transition entire websites to
+                dark mode in one variable adjustment.</p>
+              <div class="code-block">
+                <pre><code><span class="sel">:root</span> { <span class="prop">--theme-col</span>: <span class="str">#9333ea</span>; }
+<span class="sel">button</span> { <span class="prop">background</span>: <span class="fn">var</span>(<span class="str">--theme-col</span>); }</code></pre>
+              </div>
+            </div>
+
+            <!-- Gradients -->
+            <div class="card">
+              <h4>Linear & Radial Gradients</h4>
+              <p><strong>Concept:</strong> Create fading paint layers. Unlike standard colors, gradients are processed
+                internally as <code>background-image</code> elements, not <code>background-color</code>.</p>
+              <div class="code-block">
+                <pre><code><span class="prop">background</span>: <span class="fn">linear-gradient</span>(<span class="num">135deg</span>, <span class="str">red</span>, <span class="str">blue</span>);</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Object-fit vs Background-size comparison -->
+        <section class="section-block">
+          <h3>Object-fit VS Background-size / مقارنة هامة جداً</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Applies To</th>
+                  <th>Key Values</th>
+                  <th>Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>background-size</code></td>
+                  <td>Background images styled via CSS.</td>
+                  <td><code>cover</code>, <code>contain</code>, <code>100% 100%</code></td>
+                  <td>Resizes the CSS background image inside the element container box.</td>
+                </tr>
+                <tr>
+                  <td><code>object-fit</code></td>
+                  <td>Replaced tags (like <code>&lt;img&gt;</code> or <code>&lt;video&gt;</code>) in HTML.</td>
+                  <td><code>cover</code>, <code>contain</code>, <code>fill</code>, <code>none</code></td>
+                  <td>Determines how the inner content of a physical image/video tag is fitted and cropped inside its
+                    defined width/height.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Playground for Bg/Object-fit -->
+          <div class="sandbox">
+            <div class="sandbox-title"><span>&#127918;</span> Live Playground / تجربة الخلفية و Object-Fit</div>
+            <div style="margin-bottom:12px">
+              <strong>Test Background size:</strong>
+              <button class="hide-btn" onclick="changeBgSize('cover')">cover</button>
+              <button class="hide-btn" onclick="changeBgSize('contain')">contain</button>
+              <button class="hide-btn" onclick="changeBgSize('auto')">auto</button>
+            </div>
+
+            <div class="bg-sandbox-container" id="bgSandboxPreview"
+              style="background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=600&auto=format&fit=crop&q=80'); background-repeat: no-repeat; background-position: center;">
+              <div class="bg-sandbox-overlay-text">background-size: cover;</div>
+            </div>
+
+            <div style="margin-top:20px; margin-bottom:12px">
+              <strong>Test Image Object-fit:</strong>
+              <button class="hide-btn" onclick="changeObjectFit('cover')">cover</button>
+              <button class="hide-btn" onclick="changeObjectFit('contain')">contain</button>
+              <button class="hide-btn" onclick="changeObjectFit('fill')">fill</button>
+            </div>
+
+            <div class="object-fit-container">
+              <div class="object-fit-box">
+                <h5>object-fit: <span id="fitLabel" style="color:var(--accent-cyan)">cover</span></h5>
+                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=300&auto=format&fit=crop&q=60"
+                  class="object-fit-img" id="fitSandboxImg" style="object-fit: cover;">
+              </div>
+              <div class="object-fit-box">
+                <h5>Default stretched image (Stretched)</h5>
+                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=300&auto=format&fit=crop&q=60"
+                  class="object-fit-img" style="object-fit: fill;">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Coded Hero Section -->
+        <section class="section-block">
+          <h3><span class="icon">&#128187;</span> Practical Demo Hero Section / تطبيق واجهة هيرو ممتازة</h3>
+          <p>A sample landing page Hero section featuring a background image with a linear-gradient dark glass overlay
+            and responsive layouts.</p>
+
+          <div class="demo-hero">
+            <div class="demo-hero-content">
+              <h3>Design the Future of Coding</h3>
+              <p>Interactive bootcamp lessons curated to upgrade developers worldwide. Join Yousef Eldbah for structured
+                lectures on CSS systems.</p>
+              <a href="javascript:void(0)" class="demo-hero-btn">Get Started Now</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 4 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 4 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. What is the main difference between <code>opacity: 0.5;</code> and
+              <code>background-color: rgba(0,0,0,0.5);</code>?
+              <span class="ar-q">إيه الفرق بين إنك تحط opacity على العنصر وإنك تستخدم rgba في الخلفية بس؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">No difference, they behave exactly the same.
+              </div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">opacity affects the element and all its child
+                elements; RGBA only affects the background. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">RGBA changes colors; opacity only works with
+                grayscale designs.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">opacity does not trigger repaint cycles.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. How do you apply a repeating linear gradient backgrounds in CSS?
+              <span class="ar-q">إزاي تعمل تدريج لوني خطي بيتكرر في الـ CSS؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background-repeat: linear-gradient;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">background: repeating-linear-gradient(...);
+                (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background-style: repeat-linear;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background-attachment: repeat;</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. Which property controls how a raw HTML <code>&lt;img&gt;</code> is fitted inside its dimension limits?
+              <span class="ar-q">أنهي خاصية بتتحكم إزاي صورة الـ <code>&lt;img&gt;</code> بتتقص وتتملي جوة
+                الإطار بتاعها؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background-size</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">object-fit (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">object-position</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">background-clip</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. What HSL color arguments correspond to <code>red</code>?
+              <span class="ar-q">أنهي قيمة من دول بتديك اللون الأحمر بالـ HSL؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">hsl(240, 100%, 50%)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">hsl(0, 100%, 50%) (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">hsl(120, 100%, 50%)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">hsl(0, 0%, 50%)</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. What is the value of <code>background-attachment</code> that keeps a background static during page
+              scrolls?
+              <span class="ar-q">إيه القيمة بتاعة <code>background-attachment</code> اللي بتخلي الخلفية ثابتة وإنت
+                بتعمل scroll للصفحة؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">scroll</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">fixed (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">local</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">static</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 4 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 4: Diagonal Color Transition / تحدي التدريج اللوني المائل للمبتدئين</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> Create a background gradient that starts at the top-left and goes to
+                bottom-right using two hex colors: indigo and pink.</p>
+              <div class="arabic">
+                <strong>المطلوب:</strong> اعمل تدريج لوني مائل للخلفية بيبدأ من فوق ع الشمال وبينتهي تحت ع اليمين باستخدام لونين: الـ indigo والـ pink.
+              </div>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="sel">.gradient-box</span> {
+  <span class="prop">background</span>: <span class="fn">linear-gradient</span>(<span class="num">135deg</span>, <span class="str">#4f46e5</span>, <span class="str">#db2777</span>);
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 5: !IMPORTANT & SPECIFICITY -->
+      <div class="topic-section" id="topic5">
+        <div class="topic-header">
+          <div class="topic-number">5</div>
+          <h2>!important & Specificity / أولوية القواعد والـ Specificity</h2>
+          <p class="topic-subtitle">Understand the CSS hierarchy weight formula and how to avoid !important code smell.
+          </p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#9889;</span> Concept & Why It Exists / المفهوم وسبب الوجود</h3>
+          <ul>
+            <li><strong>Simple Concept / الفكرة ببساطة:</strong> CSS stands for <em>Cascading</em> Style Sheets — when
+              multiple rules target the same element, the browser uses a mathematical weight formula called
+              <strong>Specificity</strong> to decide which rule wins.</li>
+            <li><strong>Why Created / لماذا أُنشئت:</strong> Without specificity, CSS would have no conflict resolution
+              — later rules would always override earlier ones regardless of selector precision.</li>
+            <li><strong>Problem Solved / المشكلة المحلولة:</strong> Developers needed a predictable system to control
+              which styles override others in large projects with hundreds of rules.</li>
+            <li><strong>When to use !important / متى تستخدم:</strong> Only in global utility helpers like
+              <code>.d-none { display: none !important; }</code> where absolute override is intentional.</li>
+            <li><strong>When NOT to use !important / متى لا تستخدمها:</strong> Never as a "quick fix" for specificity
+              conflicts in regular components — fix the selector instead.</li>
+          </ul>
+          <div class="arabic">
+            الـ CSS اسمها كدة "Cascading" يعني فيه نظام أولويات. لما بيكون فيه أكتر من قاعدة بتستهدف نفس العنصر، المتصفح بيحسب حساب رياضي اسمه <strong>الخصوصية (Specificity)</strong> عشان يقرر مين اللي يكسب. من غير النظام ده، كانت القاعدة الأخيرة هتكسب دايماً مهما كانت التانية أدق منها.
+          </div>
+        </section>
+
+        <!-- Specificity Formula -->
+        <section class="section-block">
+          <h3>The Weight Hierarchy / تراتيب القوة الحسابية</h3>
+          <div class="card">
+            <h4>Specificity Weight Formula / معادلة حساب الأوزان</h4>
+            <ol>
+              <li><strong>Inline styles</strong>: <code>style="color: red"</code> (Specificity weight: 1,0,0,0)</li>
+              <li><strong>ID Selectors</strong>: <code>#header</code> (Specificity weight: 0,1,0,0)</li>
+              <li><strong>Class selectors, attributes, pseudo-classes</strong>: <code>.card</code>, <code>:hover</code>
+                (Specificity: 0,0,1,0)</li>
+              <li><strong>Elements & pseudo-elements</strong>: <code>div</code>, <code>::before</code> (Specificity:
+                0,0,0,1)</li>
+            </ol>
+          </div>
+
+          <!-- Specificity Examples -->
+          <h4 style="margin-top:24px">Specificity Calculation Examples / أمثلة حسابية عملية</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+            <pre><code><span class="cm">/* Example 1: Element selector only / محدد عنصر فقط */</span>
+<span class="sel">p</span> { <span class="prop">color</span>: <span class="str">red</span>; }
+<span class="cm">/* Specificity: 0,0,0,1 — weakest / الأضعف */</span>
+
+<span class="cm">/* Example 2: Class selector / محدد كلاس */</span>
+<span class="sel">.text-primary</span> { <span class="prop">color</span>: <span class="str">blue</span>; }
+<span class="cm">/* Specificity: 0,0,1,0 — beats element selector / يتغلب على محدد العنصر */</span>
+
+<span class="cm">/* Example 3: ID selector / محدد ID */</span>
+<span class="sel">#main-title</span> { <span class="prop">color</span>: <span class="str">green</span>; }
+<span class="cm">/* Specificity: 0,1,0,0 — beats class selector / يتغلب على الكلاس */</span>
+
+<span class="cm">/* Example 4: Combined selectors / محددات مجمعة */</span>
+<span class="sel">div.container #sidebar .widget</span> { <span class="prop">color</span>: <span class="str">purple</span>; }
+<span class="cm">/* Specificity: 0,1,2,1 → (1 ID + 2 classes + 1 element) / محدد مركب قوي */</span>
+
+<span class="cm">/* Example 5: Inline style always wins (unless !important) / الأسلوب المضمن يفوز دائماً */</span>
+<span class="cm">/* &lt;p style="color: orange"&gt; → Specificity: 1,0,0,0 */</span></code></pre>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-icon">&#128161;</div>
+            <div class="callout-content">
+              <div class="callout-title">Common Beginner Mistake / خطأ شائع للمبتدئين</div>
+              <div class="callout-body">
+                Students often think the order in the CSS file always determines the winner. <strong>Wrong!</strong>
+                Specificity weight is calculated first — only when two selectors have <em>equal</em> specificity does
+                order matter (last one wins).
+                <br>
+                <span style="font-family:var(--font-arabic)">كتير من الطلاب فاكرين إن ترتيب الكود في ملف الـ CSS هو اللي بيحدد مين يكسب دايماً. <strong>غلط!</strong> المتصفح بيحسب ثقل الخصوصية الأول — بس لو الثقل طلع متساوي، ساعتها بس الترتيب بيفرق (الأخير بيكسب).</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- !important breakdown -->
+        <section class="section-block">
+          <h3>What is !important & When is it acceptable? / متى نقبل كتابة !important ومتى نمنعها؟</h3>
+          <p>Applying <code>!important</code> overrides any specificity calculation, making that rule force-win. This
+            creates issues later when debugging.</p>
+          <div class="arabic">
+            لما تكتب <code>!important</code> جنب أي قيمة، بتلغي كل الحسابات وبتجبر القاعدة دي تكسب غصب. ده بيتعتبر Code Smell (علامة كود وحش) في المشاريع الكبيرة لإنه بيخلي التعديل بعد كدة مستحيل.
+          </div>
+
+          <div class="card-grid">
+            <div class="card" style="border-left: 4px solid var(--accent-red)">
+              <h4 style="color:var(--accent-red)">&#10060; Forbidden / متى يُمنع استخدامها</h4>
+              <p>Do NOT use it to solve specificity issues on general stylesheet classes or component structure.
+                Instead, solve it by writing cleaner selectors.</p>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="cm">/* ❌ BAD: Fighting specificity with !important / سيء: محاربة الخصوصية بالقوة */</span>
+<span class="sel">.title</span> {
+  <span class="prop">color</span>: <span class="str">red</span> <span class="str">!important</span>; <span class="cm">/* Don't do this! / لا تفعل هذا! */</span>
+}
+
+<span class="cm">/* ✅ GOOD: Increase specificity properly / جيد: زيادة الخصوصية بالطريقة الصحيحة */</span>
+<span class="sel">.card .card-title</span> {
+  <span class="prop">color</span>: <span class="str">red</span>; <span class="cm">/* More specific selector / محدد أكثر دقة */</span>
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--accent-green)">
+              <h4 style="color:var(--accent-green)">&#9989; Acceptable / متى يُقبل استخدامها</h4>
+              <p>Acceptable on global utility overriding helper classes where we want absolute enforcement.</p>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="cm">/* ✅ Utility classes that MUST always win / فئات المساعدة التي يجب أن تفوز دائماً */</span>
+<span class="sel">.d-none</span> { <span class="prop">display</span>: <span class="str">none</span> <span class="str">!important</span>; }
+<span class="sel">.text-center</span> { <span class="prop">text-align</span>: <span class="str">center</span> <span class="str">!important</span>; }
+<span class="sel">.sr-only</span> { <span class="cm">/* Screen reader only / مخصص لقارئات الشاشة فقط */</span>
+  <span class="prop">position</span>: <span class="str">absolute</span> <span class="str">!important</span>;
+  <span class="prop">width</span>: <span class="num">1px</span> <span class="str">!important</span>;
+  <span class="prop">height</span>: <span class="num">1px</span> <span class="str">!important</span>;
+  <span class="prop">overflow</span>: <span class="str">hidden</span> <span class="str">!important</span>;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="section-block">
+          <h3>Best Practices / أفضل الممارسات</h3>
+          <div class="card">
+            <h4>Specificity Debugging Checklist / قائمة تشخيص مشاكل الخصوصية</h4>
+            <ol>
+              <li><strong>Use DevTools:</strong> Right-click → Inspect → check which rule is winning (shown as active,
+                others are struck-through). / <span style="font-family:var(--font-arabic)">افتح الـ DevTools وشوف أنهي قاعدة كاسبة (اللي خاسرة بتلاقيها عليها خط يشطبها).</span></li>
+              <li><strong>Count the weights:</strong> IDs > Classes > Elements. Write them as (a,b,c,d). / <span
+                  style="font-family:var(--font-arabic)">احسب الأوزان: الـ ID أقوى من الكلاس أقوى من العنصر.</span></li>
+              <li><strong>Avoid deep nesting:</strong> <code>body div.container section article .card .title</code> is
+                too specific and brittle. / <span style="font-family:var(--font-arabic)">متعملش selectors طويلة أوي متداخلة — كل ما طولت كل ما التعديل بعد كدة هيبقى صعب.</span></li>
+              <li><strong>Use BEM naming:</strong> <code>.card__title--active</code> keeps specificity flat and
+                predictable. / <span style="font-family:var(--font-arabic)">استخدم طريقة الـ BEM في تسمية الكلاسات عشان الخصوصية تفضل مستوية ومتوقعة.</span></li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Challenge -->
+        <section class="section-block">
+          <div class="callout tip">
+            <div class="callout-icon">&#128161;</div>
+            <div class="callout-content">
+              <div class="callout-title">Challenge 9: Specificity Battle / تحدي معركة الخصوصية</div>
+              <div class="callout-body">
+                Given this HTML: <code>&lt;div id="box" class="red blue"&gt;Hello&lt;/div&gt;</code>, and these CSS
+                rules:
+                <br><code>.red { color: red; }</code>
+                <br><code>.blue { color: blue; }</code>
+                <br><code>#box { color: green; }</code>
+                <br>Which color wins and why? Calculate the specificity of each.
+                <br>
+                <span style="font-family:var(--font-arabic)">عندك عنصر عليه ID وكلاسين، أنهي لون هيطلع في الآخر وليه؟ احسب خصوصية كل قاعدة.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 5 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 5 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. Which selector type carries the highest specificity weight in standard CSS?
+              <span class="ar-q">أنهي selector بيكون ليه أعلى ثقل خصوصية في الـ CSS؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Element selector (e.g., div)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Class selector (e.g., .card)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">ID selector (e.g., #header) (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Universal selector (*)</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. If you style an element with an inline style, how can a style in an external CSS file override it?
+              <span class="ar-q">لو عندك inline style على عنصر، إزاي ملف الـ CSS الخارجي يقدر يتغلب
+                عليه؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">By using a double ID selector.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">By appending !important to the external rule.
+                (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It is impossible to override it under any
+                circumstances.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">By writing it inside a media query.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. What is the specificity calculation weight of a class selector combined with an element selector (e.g.,
+              <code>div.card</code>)?
+              <span class="ar-q">ثقل الخصوصية لما ندمج كلاس مع عنصر زي <code>div.card</code> بيطلع كام؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">0, 0, 0, 2</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">0, 0, 1, 1 (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">0, 1, 1, 0</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">0, 0, 2, 0</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. What is the recommended strategy when you face style override conflicts during coding?
+              <span class="ar-q">لما تلاقي تعارض في التنسيقات وأنت بتكتب كود، إيه أحسن حل؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Apply !important globally on the styles.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Increase selector specificity in your
+                stylesheets. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Convert styles into inline tags.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Remove the elements from HTML structure.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. Why does <code>!important</code> make maintenance hard in large teams?
+              <span class="ar-q">ليه الـ <code>!important</code> بيخلي الشغل في الفرق الكبيرة كابوس؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It slows down browser loading time.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">It forces other developers to write even more
+                !important tags to override your styles. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It causes layout shifts on mobile.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It disables responsive media queries.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 5 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 5: Calculate Specificity / تحدي حساب الخصوصية</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> Which rule wins on the link element below?</p>
+              <div class="code-block">
+                <pre><code>&lt;div class="container" id="main"&gt;
+  &lt;a href="#" class="link" id="home-link"&gt;Home&lt;/a&gt;
+&lt;/div&gt;
+
+/* Styles */
+1) .container .link { color: red; }
+2) #main a { color: blue; }
+3) #home-link { color: green; }</code></pre>
+              </div>
+              <div class="arabic">
+                <strong>الحل:</strong> القاعدة رقم 3 هي اللي هتكسب واللون هيكون <strong>أخضر (green)</strong>. السبب:
+                <br>
+                المحدد رقم 2 <code>#main a</code> ثقله (0,1,0,1) والمحدد رقم 3 <code>#home-link</code> ثقله (0,1,0,0). الاتنين فيهم ID واحد، بس رقم 2 فيه عنصر زيادة فطلع أعلى! طب ليه رقم 3 كسب؟ لإن رقم 2 بيستهدف الأب مش الابن مباشرة، والمحدد 3 بيستهدف اللينك نفسه بالـ ID بتاعه مباشرة.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 6: GLOBAL KEYWORDS -->
+      <div class="topic-section" id="topic6">
+        <div class="topic-header">
+          <div class="topic-number">6</div>
+          <h2>Global CSS Keywords / الكلمات المفتاحية العالمية</h2>
+          <p class="topic-subtitle">Understand how to control cascades via inherit, initial, unset, and revert.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#128260;</span> Resetting and Inheriting values / إعادة التعيين والوراثة</h3>
+          <p>Sometimes you need to reset an element's property back to its default state or force it to copy the value
+            from its parent. This is where CSS global keywords come in.</p>
+          <div class="arabic">
+            ساعات بنحتاج نرجع خاصية معينة لقيمتها الافتراضية، أو نجبرها تاخد نفس القيمة اللي واخدها العنصر الأب (الـ parent). الكلمات المفتاحية العالمية دي بتديلك تحكم كامل في وراثة التنسيقات من غير ما تلف وتدور كتير.
+          </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="section-block">
+          <h3>Comparison of Keywords / مقارنة الكلمات المفتاحية</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Keyword</th>
+                  <th>Description</th>
+                  <th>Arabic Explanation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>inherit</code></td>
+                  <td>Forces the element to take the exact same property value as its parent.</td>
+                  <td>بيجبر العنصر إنه يورث نفس القيمة بالظبط من أبوه (الـ parent).</td>
+                </tr>
+                <tr>
+                  <td><code>initial</code></td>
+                  <td>Resets the property to the default value defined by the official CSS specification (e.g.,
+                    <code>color: black</code> or <code>display: inline</code>).</td>
+                  <td>بيرجع الخاصية لقيمتها الأصلية الافتراضية اللي متحددة في كتاب مواصفات الـ CSS الرسمي (زي إن الـ display الافتراضي للبراجراف بيكون block والـ span بيكون inline).</td>
+                </tr>
+                <tr>
+                  <td><code>unset</code></td>
+                  <td>Acts as <code>inherit</code> if the property is naturally inherited, or as <code>initial</code> if
+                    it is not.</td>
+                  <td>جوكر ذكي! لو الخاصية بتتورث بطبيعتها (زي الـ color والـ font) هيشتغل كـ inherit.. ولو مش بتتورث بطبيعتها (زي الـ border والـ padding) هيشتغل كـ initial.</td>
+                </tr>
+                <tr>
+                  <td><code>revert</code></td>
+                  <td>Resets the property to the default style defined by the user agent stylesheet (browser defaults,
+                    e.g. browser default margins).</td>
+                  <td>بيرجع التنسيق لشكل المتصفح الأصلي (زي شكل الزرار أو المارجن الافتراضي لكروم أو فايرفوكس قبل ما نحط عليه أي لمسة تصميمية).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Topic 6 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 6 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. Which keyword forces a child element to copy its parent's property value?
+              <span class="ar-q">أنهي كلمة بتجبر الابن ينسخ نفس التنسيق من أبوه بالظبط؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">initial</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">inherit (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">unset</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">revert</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. What does <code>color: initial;</code> do to a text element?
+              <span class="ar-q">القاعدة <code>color: initial;</code> بتعمل إيه في لون النص؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Inherits the text color from parent.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Resets the color to the official CSS default
+                (black). (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Removes all text layout.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Applies the browser default link theme.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. If we apply <code>unset</code> on a property that is naturally inherited (like
+              <code>font-family</code>), how does it behave?
+              <span class="ar-q">لو حطينا <code>unset</code> على خاصية بتتورث زي الـ font-family، هيحصل إيه؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, true)">It acts as inherit. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It acts as initial.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It throws a browser error.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">It blocks styling updates.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. What makes <code>revert</code> different from <code>initial</code>?
+              <span class="ar-q">إيه الفرق الجوهري بين كلمة <code>revert</code> وكلمة <code>initial</code>؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">revert makes the element invisible.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">revert defaults back to the User-Agent (browser
+                default styles) instead of the CSS specification baseline. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">initial inherits from parents.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">They are exactly the same.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. To reset all properties of an element back to inheritance defaults in one rule, what can you write?
+              <span class="ar-q">عشان تصفر كل خصائص عنصر وترجعها لأصلها في سطر واحد سريع، بتكتب إيه؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">reset: all;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">all: unset; (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">inherit: all;</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">clear: both;</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 6 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 6: Resetting Anchor link styles / تحدي تجريد الروابط من ألوانها الافتراضية</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Task:</strong> You have an anchor link inside a header block. Force the link to use the parent
+                header text color instead of the browser default blue.</p>
+              <div class="arabic">
+                <strong>المطلوب:</strong> تخيل عندك لينك (tag &lt;a&gt;) جوة الـ header، وعايزه ياخد نفس لون كلام الهيدر من غير ما يظهر باللون الأزرق التقليدي بتاع المتصفحات وتحته خط. هنعمل إيه؟
+              </div>
+              <div class="code-block">
+                <div class="code-header"><span class="code-lang">CSS</span><button class="code-copy">Copy</button></div>
+                <pre><code><span class="sel">header a</span> {
+  <span class="prop">color</span>: <span class="str">inherit</span>;
+  <span class="prop">text-decoration</span>: <span class="str">none</span>;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- TOPIC 7: VENDOR PREFIXES -->
+      <div class="topic-section" id="topic7">
+        <div class="topic-header">
+          <div class="topic-number">7</div>
+          <h2>Vendor Prefixes / البادئات الخاصة بالمتصفحات</h2>
+          <p class="topic-subtitle">Understand what they are, why they were used, and how Autoprefixer automated this
+            process.</p>
+        </div>
+
+        <section class="section-block">
+          <h3><span class="icon">&#128295;</span> Concept & History / الفكرة والماضي</h3>
+          <p>Years ago, when CSS3 was introduced, browser engines implemented new features (like animations, grids,
+            transitions, or gradients) experimentally. To prevent breaking other browsers, each engine forced developers
+            to use prefix flags.</p>
+          <div class="arabic">
+            زمان، لما نزل الـ CSS3، كانت شركات المتصفحات (جوجل، أبل، مايكروسوفت) بتجرب الخصائص الجديدة زي الـ transitions والـ gradients بشكل تجريبي. وعشان كودهم ميبوظش شغل بعض، كل شركة عملت لنفسها "بادئة" أو كلمة سر لازم المطور يكتبها قبل الخاصية عشان تشتغل في المتصفح ده.
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <h4>The Prefixes / البادئات الأربعة الشهيرة</h4>
+              <ul>
+                <li><code>-webkit-</code>: Chrome, Safari, newer Opera, iOS.</li>
+                <li><code>-moz-</code>: Mozilla Firefox.</li>
+                <li><code>-ms-</code>: Internet Explorer & early Edge.</li>
+                <li><code>-o-</code>: Old Opera versions.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Autoprefixer -->
+        <section class="section-block">
+          <h3>Are we still writing prefixes? & Autoprefixer / هل ما زلنا نكتبها؟ والـ Autoprefixer</h3>
+          <p>Writing prefixes manually leads to massive, unmaintainable stylesheets. In modern workflow, developers
+            write clean, standard CSS, and use build tools like <strong>Autoprefixer</strong> (integrated in PostCSS,
+            Vite, Webpack) to append prefixes automatically based on target browser markets statistics.</p>
+          <div class="arabic">
+            كتابة البادئات دي يدوي كانت كابوس وبتملا الملف تكرار وحشو مالوش لازمة. النهاردة في الشغل الحقيقي، إحنا بنكتب كود CSS قياسي عادي ونضيف جداً، وبنسيب أداة ذكية اسمها <strong>Autoprefixer</strong> (بتكون مدمجة مع أدوات زي Vite أو Webpack) هي اللي تتدخل وتدور في قواعد البيانات وتزود البادئات المناسبة للمتصفحات القديمة أوتوماتيك.
+          </div>
+        </section>
+
+        <!-- Topic 7 Quiz -->
+        <section class="quiz">
+          <div class="quiz-header"><span>&#10024;</span> Topic 7 Quiz / اختبار سريع</div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              1. Which vendor prefix was used for early implementations in Apple Safari and Google Chrome?
+              <span class="ar-q">أنهي بادئة كانت بتستهدف متصفحات كروم وسفاري زمان؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">-moz-</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">-webkit- (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">-ms-</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">-o-</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              2. What was the primary purpose of browser vendor prefixes?
+              <span class="ar-q">إيه السبب الأساسي اللي خلاهم يخترعوا البادئات دي في المتصفحات؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">To decrease file loading sizes.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">To test experimental CSS features without
+                conflicting with official standards. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">To secure stylesheets from hacking.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">To increase specificity score.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              3. What tool is considered best practice today for managing browser vendor prefixes?
+              <span class="ar-q">أيه أفضل أداة وممارسة بنستخدمها دلوقتي عشان نريح دماغنا من كتابة البادئات؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Babel</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Autoprefixer (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Prettier</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">ESLint</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              4. Where does Autoprefixer get its browser support metadata from?
+              <span class="ar-q">أداة Autoprefixer بتعرف منين إن الخاصية دي محتاجة بادئة للمتصفح ده ولا لأ؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">W3C official rules only.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">Can I Use (caniuse.com) database. (Correct)
+              </div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">GitHub discussions.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Stack Overflow answers.</div>
+            </div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">
+              5. Should we write prefixes manually in modern 2026/2027 projects?
+              <span class="ar-q">هل لسة فيه أي لازمة إننا نكتب البادئات دي بأيدينا في المشاريع الحديثة؟</span>
+            </div>
+            <div class="quiz-options">
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Yes, always to guarantee support.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, true)">No, write standard CSS and let compiler tools
+                inject prefixes automatically. (Correct)</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Only for mobile screens.</div>
+              <div class="quiz-option" onclick="checkAnswer(this, false)">Only inside inline styling attributes.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topic 7 Exercises -->
+        <section class="section-block">
+          <h3>Exercises & Challenges / تمارين وتحديات</h3>
+          <div class="collapsible">
+            <div class="collapsible-header">
+              <span>Exercise 7: Compile Prefix Output / فهم مخرجات البادئات</span>
+              <span class="arrow">&#9662;</span>
+            </div>
+            <div class="collapsible-body">
+              <p><strong>Question:</strong> How would an old transition statement look after being compiled with browser
+                prefixes?</p>
+              <div class="arabic">
+                <strong>السؤال:</strong> تفتكر كود الـ transition البسيط ده هيبقي شكله عامل إزاي بعد ما الـ compiler يحط البادئات للمتصفحات القديمة؟
+              </div>
+              <div class="code-block">
+                <pre><code>/* Input CSS */
+.box {
+  transition: transform 0.3s ease;
+}
+
+/* Compiled Output CSS */
+.box {
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -moz-transform 0.3s ease;
+  -o-transition: -o-transform 0.3s ease;
+  transition: transform 0.3s ease;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- COMPREHENSIVE MINI PROJECT -->
+      <div class="topic-section" id="project">
+        <div class="topic-header">
+          <div class="topic-number">&#128187;</div>
+          <h2>Mini Project: Headphones Landing Page / مشروع تطبيقي متكامل</h2>
+          <p class="topic-subtitle">A real-world project applying CSS variables, gradients, flex children,
+            pseudo-elements, hiding overlays, and object-fit.</p>
+        </div>
+
+        <section class="section-block">
+          <div class="project-wrapper">
+            <!-- Navbar inside project -->
+            <nav class="project-nav">
+              <div class="project-logo">AERO SOUND</div>
+              <ul class="project-menu">
+                <li><a href="javascript:void(0)">Home</a></li>
+                <li><a href="javascript:void(0)">Specs</a></li>
+                <li><a href="javascript:void(0)">Order</a></li>
+              </ul>
+            </nav>
+
+            <!-- Hero of project -->
+            <div class="project-hero">
+              <div class="project-hero-content">
+                <span class="project-hero-badge">NEW PRO MODEL</span>
+                <h4>Aero Pro Wireless</h4>
+                <p>Experience studio-grade acoustics. Powered by customized active hybrid sound engines, wrapped in
+                  ergonomic cyber comfort pads.</p>
+                <button class="project-btn">Buy Aero Now &rarr;</button>
+              </div>
+              <div class="project-hero-media">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60"
+                  alt="Premium Headphones" class="project-img">
+              </div>
+            </div>
+
+            <!-- Feature grid of project -->
+            <div class="project-section-title">
+              <h5>Aero Specifications</h5>
+              <p>Engineered with advanced materials and cutting-edge features.</p>
+            </div>
+
+            <div class="project-features">
+              <div class="project-card">
+                <div class="project-card-icon">⚡</div>
+                <h6>60H Battery life</h6>
+                <p>Charge for 10 minutes, listen for 5 hours. Never run dry.</p>
+              </div>
+              <div class="project-card">
+                <div class="project-card-icon">🔇</div>
+                <h6>Hybrid ANC</h6>
+                <p>Block out external noise up to 40dB with smart filters.</p>
+              </div>
+              <div class="project-card">
+                <div class="project-card-icon">🌀</div>
+                <h6>Spatial Audio</h6>
+                <p>Cinematic surround tracking sound feels like live concerts.</p>
+              </div>
+            </div>
+
+            <footer class="project-footer">
+              Aero Sound Design Labs &middot; Built using Advanced HTML & CSS properties.
+            </footer>
+          </div>
+        </section>
+      </div>
+
+      <!-- CHEAT SHEET SUMMARY -->
+      <div class="topic-section" id="cheatsheet">
+        <div class="topic-header">
+          <div class="topic-number">&#128196;</div>
+          <h2>Advanced CSS Cheat Sheet </h2>
+          <p class="topic-subtitle">Quick reference cards summarizing properties, syntax, and behaviors learned today.
+          </p>
+        </div>
+
+        <section class="section-block">
+          <div class="cheat-sheet">
+            <!-- Flexbox Child -->
+            <div class="cheat-item">
+              <h5>Flexbox Child Attributes</h5>
+              <code>order: [integer]</code>
+              <span>Changes visual sorting weight. Default: 0</span>
+              <code>flex-grow: [number]</code>
+              <span>Proportional expansion factor. Default: 0</span>
+              <code>flex-shrink: [number]</code>
+              <span>Proportional shrinking factor. Default: 1</span>
+              <code>flex-basis: [length|auto]</code>
+              <span>Starting default content width. Default: auto</span>
+              <code>flex: [g] [s] [b]</code>
+              <span>Recommended shorthand format.</span>
+            </div>
+
+            <!-- Hiding Elements -->
+            <div class="cheat-item">
+              <h5>Hiding Methods</h5>
+              <code>display: none;</code>
+              <span>Collapses layout space, blocks all clicks. No transitions.</span>
+              <code>visibility: hidden;</code>
+              <span>Keeps layout space empty, blocks clicks.</span>
+              <code>opacity: 0;</code>
+              <span>Keeps space, ALLOWS clicks. Works with animations.</span>
+              <code>pointer-events: none;</code>
+              <span>Element visible, clicks pass through underneath.</span>
+            </div>
+
+            <!-- Pseudo & Keywords -->
+            <div class="cheat-item">
+              <h5>Pseudo-Elements & Keywords</h5>
+              <code>::before / ::after</code>
+              <span>Virtual elements inside parent container. Requires <code>content: ""</code>.</span>
+              <code>inherit</code>
+              <span>Inherit parent attribute style.</span>
+              <code>initial</code>
+              <span>Reset styling back to CSS baseline standard.</span>
+              <code>unset</code>
+              <span>Resolves as inherit or initial depending on property type.</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- CONVERSATION SUMMARY -->
+      <div class="topic-section" id="summary">
+        <div class="topic-header">
+          <div class="topic-number">&#128214;</div>
+          <h2>Session Summary </h2>
+          <p class="topic-subtitle">A concise conclusion of advanced CSS layouts and standards.</p>
+        </div>
+
+        <section class="section-block">
+          <p>Congratulations! You have completed Session 15. You are now equipped with knowledge on:</p>
+          <ul>
+            <li>Aligning individual flexbox children using grow/shrink multipliers.</li>
+            <li>Distinguishing layout spacing behaviors when hiding elements.</li>
+            <li>Creating complex CSS graphics and tooltip systems using ::before and ::after.</li>
+            <li>Managing backgrounds, utilizing color formats (RGB, RGBA, HSL), and aligning assets with object-fit.
+            </li>
+            <li>Controlling priority cascades with Specificity calculations and global inheritance keywords.</li>
+            <li>Understanding vendor prefixes legacy and Autoprefixer build pipeline benefits.</li>
+          </ul>
+          <div class="arabic">
+            <strong>ألف مبروك!</strong> إنت كدة خلصت السيشين الـ 15 والأخير في الكورس بتاعنا. وبقيت جاهز تماماً تطبق كل التقنيات دي وتصمم مواقع متكاملة، متجاوبة وشكلها احترافي من غير المشاكل والـ bugs اللي بتقابل المبتدئين. بالتوفيق في رحلتك اللي جاية ومستني أشوف مشاريعك الجاية تكسر الدنيا!
+          </div>
+        </section>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <p>Web Design Bootcamp &middot; Session 15: Advanced CSS Techniques</p>
+        <p style="margin-top:8px">Created by <a href="https://www.linkedin.com/in/yousef-eldbah/" target="_blank">Yousef
+            Eldbah</a> &middot; Instructor @ NTI</p>
+        <p style="margin-top:4px;color:var(--text-muted)">&copy; 2025 MindLoop Academy. All rights reserved.</p>
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="session15.js"></script>
+</body>
+
+</html>
